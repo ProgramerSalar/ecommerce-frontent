@@ -3,7 +3,7 @@ import React from "react";
 const Home = () => {
   return (
     <div>
-      <p>home</p>
+      <p className="cursor-pointer">home</p>
     </div>
   );
 };
