@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 import { auth } from "../../firebase";
 
@@ -49,7 +48,7 @@ const Register = () => {
         <div className="row-auto">
           <div className="col-md "></div>
           <h4 className="">Register</h4>
-          <ToastContainer />
+
           {registerForm()}
         </div>
       </div>
