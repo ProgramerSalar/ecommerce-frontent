@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { auth } from "../../firebase";
 
@@ -11,6 +12,7 @@ const Register = () => {
     // console.log("ENV --->", process.env.REACT_APP_REGISTER_REDIRECT_URL);
     const config = {
       url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
+      // url: "http://localhost:3000/register/complete",
       handleCodeInApp: true,
     };
 
@@ -48,7 +50,7 @@ const Register = () => {
         <div className="row-auto">
           <div className="col-md "></div>
           <h4 className="">Register</h4>
-
+          <ToastContainer />
           {registerForm()}
         </div>
       </div>
