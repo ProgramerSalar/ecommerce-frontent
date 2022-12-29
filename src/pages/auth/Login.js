@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-import { auth } from "../../firebase";
+import { auth, googleAuthProvider } from "../../firebase";
 import { Button } from "antd";
-
-import { MailOutlined } from "@ant-design/icons";
+import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 
 const Login = ({ history }) => {
@@ -38,6 +36,27 @@ const Login = ({ history }) => {
       toast.error(error.message);
       setLoading(false);
     }
+  };
+
+  const googleLogin = async () => {
+    auth
+      .signInWithPopup(googleAuthProvider)
+      .then(async (result) => {
+        const { user } = result;
+        const idTokenResult = await user.getIdTokenResult();
+        dispatch({
+          type: "LOGGED_IN_USER",
+          payload: {
+            email: user.email,
+            token: idTokenResult.token,
+          },
+        });
+        history.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
   };
 
   const LoginForm = () => (
@@ -84,9 +103,26 @@ const Login = ({ history }) => {
       <div className="container p-5">
         <div className="row-auto">
           <div className="col-md "></div>
-          <h4 className="">Login</h4>
+          {loading ? (
+            <h4 className="text-denger">loading...</h4>
+          ) : (
+            <h4>Login</h4>
+          )}
           <ToastContainer />
           {LoginForm()}
+
+          <Button
+            onClick={googleLogin}
+            type="danger"
+            className="mb-3"
+            block
+            shape="round"
+            icon={<GoogleOutlined />}
+            size="large"
+            disabled={!email || password.length < 6}
+          >
+            Login with google
+          </Button>
         </div>
       </div>
     </div>
