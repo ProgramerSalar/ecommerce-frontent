@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import { auth } from "../../firebase";
 
 const Register = () => {
@@ -8,8 +9,9 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // console.log("ENV --->", process.env.REACT_APP_REGISTER_REDIRECT_URL);
     const config = {
-      url: "http://localhost:3000/register/complete",
+      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
       handleCodeInApp: true,
     };
 
