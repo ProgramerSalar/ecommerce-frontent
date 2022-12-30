@@ -5,10 +5,11 @@ import { auth, googleAuthProvider } from "../../firebase";
 import { Button } from "antd";
 import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Login = ({ history }) => {
-  const [email, setEmail] = useState("manishkumar60708090@gmail.com");
-  const [password, setpassword] = useState("123456");
+  const [email, setEmail] = useState("");
+  const [password, setpassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   let dispatch = useDispatch();
@@ -86,7 +87,7 @@ const Login = ({ history }) => {
       <Button
         onClick={handleSubmit}
         type="primary"
-        className="mb-3"
+        className="mb-3 text-blue-300"
         block
         shape="round"
         icon={<MailOutlined />}
@@ -114,7 +115,7 @@ const Login = ({ history }) => {
           <Button
             onClick={googleLogin}
             type="danger"
-            className="mb-3"
+            className="mb-3 hover:bg-red-500"
             block
             shape="round"
             icon={<GoogleOutlined />}
@@ -123,6 +124,13 @@ const Login = ({ history }) => {
           >
             Login with google
           </Button>
+
+          <Link
+            to="/forgot/password"
+            className="float-right text-danger hover:text-blue-500"
+          >
+            Forgot password
+          </Link>
         </div>
       </div>
     </div>
